@@ -21,8 +21,8 @@ from issues import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('syncIssues/', views.syncIssues, name="syncIssues"),
-    path('getUser/', views.getUser, name="getUser"),
-    path('getLabel/', views.getLabel, name="getLabel"),
-    path('getDays/', views.getDays, name="getDays")
+    path('getUser/<str:userName>', views.getUser, name="getUser"),
+    path('getLabel/<str:label>', views.getLabel, name="getLabel"),
+    path('getDays/<int:days>', views.getDays, name="getDays")
 
 ]

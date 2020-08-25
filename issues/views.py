@@ -4,36 +4,53 @@ from django.http import HttpResponse, Http404
 from . import apiRequests as apiCall
 from .mongoConnection import MongoConnection
 
-# from rest_framework import
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+
+from rest_framework.response import Response
+from .serializers import issueSerializer
 
 
+@api_view(['GET'])
 def syncIssues(request):
 
     response = apiCall.syncIssues()
     if response:
 
         mongo = MongoConnection()
-        mongo.insertIssues(response)
+        inserted = mongo.insertIssues(response)
 
-        return HttpResponse("Hello World")
-    
+        if inserted:
+            return Response("true")
+
+        else:
+            return Response("false")
     else:
-        return Http404
+        return Response("false")
 
-def getLabel(request):
-     mongo = MongoConnection()
-     result = mongo.getLabel("bug")
-     
-     return HttpResponse(result)
+@api_view(['GET'])
+def getLabel(request, label):
+    mongo = MongoConnection()
+    result = mongo.getLabel(label)
 
-def getUser(request):
-     mongo = MongoConnection()
-     result = mongo.getUser("davidism")
-     
-     return HttpResponse(result)
+    response = issueSerializer(result, many=True).data
+    return Response(response)
+    #  return HttpResponse(result)
 
-def getDays(request):
-     mongo = MongoConnection()
-     result = mongo.getDays(55)
-     
-     return HttpResponse(result)
+
+@api_view(['GET'])
+def getUser(request, userName):
+    mongo = MongoConnection()
+    result = mongo.getUser(userName)
+
+    response = issueSerializer(result, many=True).data
+    return Response(response)
+
+
+@api_view(['GET'])
+def getDays(request, days):
+    mongo = MongoConnection()
+    result = mongo.getDays(days)
+
+    response = issueSerializer(result, many=True).data
+    return Response(response)
