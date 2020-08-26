@@ -6,9 +6,14 @@
     "APP": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
+        "@schematics/angular:component": [
+          {
+            "style": "scss"
+          },
+          {
+            "skipTests": true
+          }
+        ]
       },
       "root": "",
       "sourceRoot": "src",
