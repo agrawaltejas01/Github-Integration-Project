@@ -19,7 +19,7 @@ export class ApiCallService {
 
 	syncIssues()
 	{
-		return this.http.get<IssueSchema[]>(this.baseUrl + "syncIssues")
+		return this.http.get<Boolean>(this.baseUrl + "syncIssues")
 	}
 
 	getDays(days : number)
@@ -36,4 +36,10 @@ export class ApiCallService {
 	{
 		return this.http.get<IssueSchema[]>(this.baseUrl + "getUser/" + user)
 	}
+
+	getPaginatedIssues(page : number)
+	{
+		return this.http.get<IssueSchema[]>(this.baseUrl + "getPaginatedIssues/" + page)
+	}
+
 }

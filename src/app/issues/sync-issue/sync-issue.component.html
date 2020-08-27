@@ -1,11 +1,30 @@
 <div class="body">
-    <div class="jumbotron">
-        <h2>
-            GitHub Repository Issues :
-            <a href="https://github.com/pallets/click" target="_blank">
-                <strong>pallets/click</strong>
-            </a>
+    <div class="m bg-dark">
+        <div class="text-center p-2">
+            <div class="mb-1 pb-3">
+                <h2>
+                    <span class="text-light">GitHub Repository Issues :</span>
+                    <a href="https://github.com/pallets/click" target="_blank">
+                        <strong>pallets/click</strong>
+                    </a>
+                </h2>
+            </div>
 
-        </h2>
+            <div class="">
+                <button class="btn btn-primary">
+                    <h3>
+                        Sync Issues
+                    </h3>
+                </button>
+            </div>
+        </div>
     </div>
+
+    <div>
+        <div *ngIf="issues != null">
+            <display-issue-list [issueList]="issues" ></display-issue-list>
+        </div>
+    </div>
+
+
 </div>

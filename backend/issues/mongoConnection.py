@@ -19,6 +19,11 @@ class MongoConnection(object):
 
         return True
 
+    def getPaginatedIssues(self, page):
+
+        paginatedIssues = self.issue.find().skip((page-1)*15).limit(15)
+        return paginatedIssues
+
     def getLabel(self, label):
 
         query = {

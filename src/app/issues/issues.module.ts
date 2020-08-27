@@ -8,12 +8,14 @@ import { SyncIssueComponent } from './sync-issue/sync-issue.component';
 
 // Service
 import { ApiCallService } from '../store/service/api-call.service';
+import { DisplayIssueListComponent } from './display-issue-list/display-issue-list.component';
 
 
 
 @NgModule({
   declarations: [
-    SyncIssueComponent
+    SyncIssueComponent,
+    DisplayIssueListComponent
   ],
 
   imports: [

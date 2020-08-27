@@ -28,6 +28,15 @@ def syncIssues(request):
     else:
         return Response("false")
 
+
+@api_view(['GET'])
+def getPaginatedIssues(request, page):
+    mongo = MongoConnection()
+    result = mongo.getPaginatedIssues(page)
+
+    response = issueSerializer(result, many=True).data
+    return Response(response)
+
 @api_view(['GET'])
 def getLabel(request, label):
     mongo = MongoConnection()

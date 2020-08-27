@@ -1,0 +1,77 @@
+<div *ngIf="!issueList.length">
+    <div class="card align-items-center">
+        <div class="card-body">
+            Nothing Here
+        </div>
+    </div>
+</div>
+
+<div *ngFor="let issue of issueList; let i = index">
+    <div class="card">
+        <div class="card-body" data-toggle="collapse" attr.data-target="#description-{{issue.number}}"
+            attr.aria-controls="description-{{issue.number}}">
+
+            <div class="form-inline">
+
+                <div class="state mr-1">
+                    <div *ngIf="issue.state == 'open'; else closed">
+                        <i class="fa fa-exclamation-circle" style="color: lightgreen;"></i>
+                    </div>
+                    <ng-template #closed>
+                        <i class="fa fa-check-circle" style="color: lightcoral;"></i>
+                    </ng-template>
+                </div>
+
+                <div class="title">
+                    <strong>{{issue.title}}</strong>
+                </div>
+
+            </div>
+
+            <div class="form-inline">
+
+                <div class="ml-3 number mr-1">
+                    #{{issue.number}}
+                </div>
+
+                <div class="date mr-1">
+                    <div *ngIf="issue.state == 'open'; else closedDate">
+                        opened on
+                    </div>
+                    <ng-template #closedDate>
+                        was closed on
+                    </ng-template>
+                    {{issue.creationDate | date}}
+                </div>
+
+                <div class="user">
+                    by {{issue.user}}
+                </div>
+
+            </div>
+
+            <div class="collapse" attr.id="description-{{issue.number}}">
+                <div class="card-body border-0" id="issueBodyCard">
+
+                    <div style="margin-left: 8%;" *ngIf="task?.description; else noDescription">
+                        {{issue.body}}
+                    </div>
+
+                    <ng-template style="margin-left: 8%;" #noDescription>
+                        No Description
+                    </ng-template>
+
+                    <a class="updateLogo" data-toggle="modal" href="#updateTaskModal" (click)="selectTaskForUpdate(task)">
+                        <fa-icon [icon]='faPencilSquare' title="Edit Task">
+                        </fa-icon>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div *ngFor="let issue of issueList; let i = index" class="collapse" attr.id="description-{{issue.number}}">
+
+</div>

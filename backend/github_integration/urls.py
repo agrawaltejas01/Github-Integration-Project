@@ -23,6 +23,7 @@ urlpatterns = [
     path('syncIssues/', views.syncIssues, name="syncIssues"),
     path('getUser/<str:userName>', views.getUser, name="getUser"),
     path('getLabel/<str:label>', views.getLabel, name="getLabel"),
-    path('getDays/<int:days>', views.getDays, name="getDays")
+    path('getDays/<int:days>', views.getDays, name="getDays"),
+    path('getPaginatedIssues/<int:page>', views.getPaginatedIssues, name="getPaginatedIssues")
 
 ]
